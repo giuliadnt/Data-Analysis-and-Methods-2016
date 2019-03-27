@@ -10,13 +10,14 @@ np.random.seed(0)
 seeds = np.random.choice(range(len(iris)), 3, replace=False)
 
 
-def kmeans(data, seedIndices):
-    '''
+def kmeans(data, seed_indices):
+
+    """
     :param data: dataset in a d x N matric
     :param seedIndices: vector of indices for k seed observation
     :return: cluster centers in a numpy array; assigned label for each datapoint (numpy array
-    '''
-    centroids = data[seedIndices, :]
+    """
+    centroids = data[seed_indices, :]
     C = np.zeros(len(data))
     new_centroids = np.zeros_like(centroids)
     threshold = 100
@@ -38,14 +39,14 @@ def kmeans(data, seedIndices):
 
 
 # PLOT OF CLUSTERS AND CENTROIDS
-set = apply_pca(iris)
+clusters = apply_pca(iris)
 labels = kmeans(apply_pca(iris), seeds)[1]
 centers = kmeans(apply_pca(iris), seeds)[0]
-plt.scatter(set[np.where(labels == 0)][:, 0], set[np.where(labels == 0)][:, 1], marker='.', color='r')
+plt.scatter(clusters[np.where(labels == 0)][:, 0], clusters[np.where(labels == 0)][:, 1], marker='.', color='r')
 plt.scatter(centers[0][0], centers[0][1], s=50, color='r')
-plt.scatter(set[np.where(labels == 1)][:, 0], set[np.where(labels == 1)][:, 1], marker='.', color='g')
+plt.scatter(clusters[np.where(labels == 1)][:, 0], clusters[np.where(labels == 1)][:, 1], marker='.', color='g')
 plt.scatter(centers[1][0], centers[1][1], s=50, color='g')
-plt.scatter(set[np.where(labels == 2)][:, 0], set[np.where(labels == 2)][:, 1], marker='.', color='b')
+plt.scatter(clusters[np.where(labels == 2)][:, 0], clusters[np.where(labels == 2)][:, 1], marker='.', color='b')
 plt.scatter(centers[2][0], centers[2][1], s=50, color='b')
 plt.title("Kmeans clusters on IRIS dataset")
 plt.show()

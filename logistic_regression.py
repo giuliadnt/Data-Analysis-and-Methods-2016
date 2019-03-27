@@ -10,8 +10,8 @@ test_y = np.loadtxt('redwine_testlabels.txt')
 train_x, test_x = cent_and_norm(train_x_orig, test_x_orig)
 
 
-def logistic(input):
-    return 1.0 / (1.0 + np.exp(-input))
+def logistic(inp):
+    return 1.0 / (1.0 + np.exp(-inp))
 
 
 def logistic_insample(X, y, w):
@@ -32,13 +32,15 @@ def logistic_gradient(X, y, w):
 
 
 def log_reg(Xorig, y, max_iter, grad_thr):
-    '''
+
+    """
     :param Xorig: dataset, d by N data matrix of input values
     :param y: target labels binary values: 1; -1
     :param max_iter: maximum number of iteration
     :param grad_thr: threshold for the gradient descent
     :return: vector of weigths, vector of values computed by the logistic gradient function
-    '''
+    """
+
     # X is a d by N data matrix of input values
     num_pts, num_feat = Xorig.shape
     onevec = np.ones((num_pts, 1))
@@ -96,10 +98,10 @@ def log_reg(Xorig, y, max_iter, grad_thr):
     return w, E_in
 
 
-def log_pred(Xorig, w):
-    ones = np.ones((len(Xorig), 1))
-    Xorig_1 = np.concatenate((ones, Xorig), axis=1)
-    P = logistic(np.dot(Xorig_1, np.transpose(w)))
+def log_pred(x_orig, w):
+    ones = np.ones((len(x_orig), 1))
+    x_orig_1 = np.concatenate((ones, x_orig), axis=1)
+    P = logistic(np.dot(x_orig_1, np.transpose(w)))
     pred_classes = np.where(P >= 0.5, 1, 0)
     return P, pred_classes
 

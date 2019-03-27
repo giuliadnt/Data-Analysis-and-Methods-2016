@@ -3,17 +3,17 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 
-#read the raw data
+# read the raw data
 train = np.genfromtxt('covtype_train.csv', delimiter=',')
 test = np.genfromtxt('covtype_test.csv', delimiter=',')
-#remove labels column from train set
-train_data = train[:,:-1]
-#remove labels column from test set
-test_data = test[:,:-1]
-#train labels
-train_labels = train[:,-1]
-#test labels
-test_labels = test[:,-1]
+# remove labels column from train set
+train_data = train[:, :-1]
+# remove labels column from test set
+test_data = test[:, :-1]
+# train labels
+train_labels = train[:, -1]
+# test labels
+test_labels = test[:, -1]
 
 # train random forest
 print ('training random forest')
